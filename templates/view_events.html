@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>All Events</h1>
+    <ul>
+        {% for event in events %}
+            <li class="event-item">
+                <h2>{{ event.name }}</h2>
+                <p>Date: {{ event.date }}</p>
+                <p>Location: {{ event.location }}</p>
+                <p>Description: {{ event.description }}</p>
+                <div class="event-actions">
+                    <a href="{{ url_for('edit_event', event_id=event['_id']) }}" class="edit-btn">Edit</a><br>
+                    <form action="{{ url_for('delete_event', event_id=event['_id']) }}" method="post" class="delete-form">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}" class="back-home-link">Back to Home</a>
+
+    <style>
+        /* Example of minimal CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .event-item {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .event-actions {
+            margin-top: 10px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        .edit-btn:hover, .delete-btn:hover {
+            background-color: #0056b3;
+        }
+        .back-home-link {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</body>
+</html>
